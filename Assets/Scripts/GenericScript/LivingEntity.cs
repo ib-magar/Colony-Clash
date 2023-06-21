@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//When inheriting from this script make sure to make start function override and subscribe to the dieEvent
+
 public class LivingEntity : MonoBehaviour, IHealth
 {
 
     protected float health;
     public float startingHealth;
     public event System.Action DiedEvent;
+    public event System.Action DamageEvent;
     public virtual void Start()
     {
         health = startingHealth;
@@ -21,6 +24,10 @@ public class LivingEntity : MonoBehaviour, IHealth
         {
             Die();
         }
+        else
+        {
+            Damage();
+        }
     }
     [ContextMenu("self destruct")]
     protected void Die()
@@ -30,4 +37,8 @@ public class LivingEntity : MonoBehaviour, IHealth
         GameObject.Destroy(gameObject);
     }
 
+    protected void Damage()
+    {
+        if (DamageEvent != null) DamageEvent();
+    }
 }

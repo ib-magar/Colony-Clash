@@ -6,14 +6,13 @@ using UnityEngine.Events;
 
 public class Worker_Ant : LivingEntity
 {
-
-    private void Start()
+    public override void Start()
     {
         base.Start();
         DiedEvent += Death;
 
         _workPointHolder = GameObject.FindGameObjectWithTag("WorkPointHolder").transform;
-        //_generateCoin.AddListener( EconomySystem.Instance.AddCoins);
+        _generateCoin.AddListener( EconomySystem.Instance.AddCoins);
 
         StartCoroutine(WorkerAntBehaviour());
     }
@@ -51,10 +50,6 @@ public class Worker_Ant : LivingEntity
         }
     }
 
-    private void Update()
-    {
-        
-    }
 
     //Death function 
     void Death()
