@@ -4,9 +4,9 @@ using UnityEngine;
 
 //When inheriting from this script make sure to make start function override and subscribe to the dieEvent
 
-public class LivingEntity : MonoBehaviour, IHealth
+public class LivingEntity : MonoBehaviour, IHealth, ISoundEffects
 {
-
+    [Header("Health")]
     protected float health;
     public float startingHealth;
     public event System.Action DiedEvent;
@@ -14,6 +14,11 @@ public class LivingEntity : MonoBehaviour, IHealth
     public virtual void Start()
     {
         health = startingHealth;
+        _fxsource = gameObject.AddComponent<AudioSource>();
+        _fxsource.volume = _startVolume;
+        _fxsource.loop = false;
+        _fxsource.playOnAwake = false;
+
     }
 
     //Interface function implementation
@@ -40,5 +45,15 @@ public class LivingEntity : MonoBehaviour, IHealth
     protected void Damage()
     {
         if (DamageEvent != null) DamageEvent();
+    }
+
+    [Header("Audio")]
+    protected AudioSource _fxsource;
+    [Range(0, 1)] public float _startVolume = .5f;
+    public Vector2 pitchRange = new Vector2(.8f, 1.2f);
+    public void PlaySoundEffect(AudioClip clip)
+    {
+        _fxsource.pitch=Random.Range(pitchRange.x,pitchRange.y);
+        _fxsource.PlayOneShot(clip);
     }
 }

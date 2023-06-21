@@ -57,7 +57,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2640528741535479395}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.3363976, y: 3.1438024, z: 0.02422775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -132,6 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 10
+  _startVolume: 0.764
+  pitchRange: {x: 0.8, y: 1.2}
   _attackTime: 2
   _attackRange: 12.55
   _enemyLayerMask:
@@ -140,6 +142,7 @@ MonoBehaviour:
   _bullet: {fileID: 16739371772862265, guid: 78ef8cf2d6dadc44ea46dcb033246f24, type: 3}
   _spawnPoint: {fileID: 2640528740493339788}
   _damageParticleSystem: {fileID: 4030772908794729692}
+  _shootSound: {fileID: 8300000, guid: 06b30b944056a034cb45018dce7682df, type: 3}
 --- !u!61 &399068613874803460
 BoxCollider2D:
   m_ObjectHideFlags: 0

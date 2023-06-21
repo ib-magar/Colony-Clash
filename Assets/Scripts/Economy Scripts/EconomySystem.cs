@@ -61,7 +61,7 @@ public class EconomySystem : MonoBehaviour
     private void Start()
     {
         _currentCoins = startingCoinsValue;    
-
+        _source=GetComponent<AudioSource>();
     }
 
     public bool buyEntity(string entityName)
@@ -74,6 +74,7 @@ public class EconomySystem : MonoBehaviour
                 //grant the entity
                 _currentCoins-= _requiredValue;
                 if (_coinsUpdatedEvent != null) _coinsUpdatedEvent.Invoke(_currentCoins);
+                //PlaySoundEffect(_coinReducedSound);
                 return true;
             }
         }
@@ -85,6 +86,16 @@ public class EconomySystem : MonoBehaviour
         {
             _currentCoins+= amount;
             if (_coinsUpdatedEvent != null) _coinsUpdatedEvent.Invoke(_currentCoins);
+            //PlaySoundEffect(_coinCollectedSound);
         }
+    }
+    [Header("audios")]
+    public AudioClip _coinCollectedSound;
+    public AudioClip _coinReducedSound;
+    private AudioSource _source;
+    void PlaySoundEffect(AudioClip clip)
+    {
+        _source.pitch = UnityEngine.Random.Range(.8f, 1.3f);
+        _source.PlayOneShot(clip);
     }
 }

@@ -54,16 +54,19 @@ public class Termites : LivingEntity
             State = EnemyState.moving;
         }
     }
+    [Header("audios")]
+    public AudioClip _damageSound;
     void DamageEffect()
     {
+        PlaySoundEffect(_damageSound);
         _damageParticleSystem.Play();
     }
-
+    [Header("Effects")]
+    public GameObject _dieEffect;
     void Death()
     {
         //Get destroyed
-        
-        
+       Instantiate(_dieEffect, transform.position, Quaternion.identity);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
