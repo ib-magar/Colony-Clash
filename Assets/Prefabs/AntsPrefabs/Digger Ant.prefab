@@ -128,5 +128,5 @@ MonoBehaviour:
   _startVolume: 0.5
   pitchRange: {x: 0.8, y: 1.2}
   _isMined: 0
-  _timeToMine: 7
+  _timeToMine: 8
   _deathEffect: {fileID: 2473918497908342117, guid: af4998c34318c94489cc35f8e838691a, type: 3}

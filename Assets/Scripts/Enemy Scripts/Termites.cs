@@ -20,6 +20,7 @@ public class Termites : LivingEntity
         DamageEvent += DamageEffect;
         State = EnemyState.moving;
 
+        _animator=GetComponentInChildren<Animator>();
         StartCoroutine(Behaviour());
     }
 
@@ -29,7 +30,7 @@ public class Termites : LivingEntity
     {
         if (State == EnemyState.moving)
         {
-            transform.position += -transform.right * _speed * Time.deltaTime;
+            transform.position += -Vector3.right * _speed * Time.deltaTime;
         }
     }
 
@@ -39,15 +40,19 @@ public class Termites : LivingEntity
     public float _checkDistance;
     public LayerMask _AntLayerMask;
     public ParticleSystem _damageParticleSystem;
+
+    [Header("Animations")]
+    [SerializeField] Animator _animator;
     IEnumerator Behaviour()
     {
         while(true)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.right, _checkDistance, _AntLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.right, _checkDistance, _AntLayerMask);
 
             if (hit.collider != null && hit.collider.TryGetComponent(out LivingEntity _ant))
             {
                 State = EnemyState.Attacking;
+                _animator.SetTrigger("attack");
                 _ant.takeDamage(_damageAmount);
             }
             yield return new WaitForSeconds(_CheckTime);        //wait for the attack animation time later.

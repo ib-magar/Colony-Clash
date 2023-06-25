@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using System;
-using JetBrains.Annotations;
 using UnityEngine.Events;
 
 public class EconomySystem : MonoBehaviour
@@ -62,8 +60,24 @@ public class EconomySystem : MonoBehaviour
     {
         _currentCoins = startingCoinsValue;    
         _source=GetComponent<AudioSource>();
+        _coinsUpdatedEvent.Invoke(_currentCoins);
     }
-
+    public bool checkPrice(int amount)
+    {
+        if (_currentCoins >= amount)
+            return true;
+        return false;
+    }
+    public bool buy(int amount)
+    {
+        if (_currentCoins > amount)
+        {
+            _currentCoins -= amount;
+            _coinsUpdatedEvent.Invoke(_currentCoins);
+            return true;
+        }
+        else return false;
+    }
     public bool buyEntity(string entityName)
     {
         if(_entityValue.ContainsKey(entityName))
