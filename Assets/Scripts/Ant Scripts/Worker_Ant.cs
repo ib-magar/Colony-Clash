@@ -28,17 +28,29 @@ public class Worker_Ant : LivingEntity
     public float _speed=1f;
     public float _distanceReach;
     public float _waitTime;
+    public float _rotationSpeed;
     IEnumerator WorkerAntBehaviour()
     {
+        Vector2 direction;
+        float angle;
+        //Quaternion targetRotation;
         while(true)
         {
-                 target = _workPointHolder.GetChild(Random.Range(0, _workPointHolder.childCount)).transform;
+            target = _workPointHolder.GetChild(Random.Range(0, _workPointHolder.childCount)).transform;
+              direction = (target.position - transform.position);
+            /*while ((Vector2)transform.up != direction)
+            {
+                 angle =90f- Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                 targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                yield return null;
+            }*/
             while (Vector2.Distance(target.position,transform.position)>_distanceReach && target!=null)
             {
                 // Make the GameObject face the target point
-                Vector3 direction = target.position - transform.position;
-                float angle =90f- Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                  direction = target.position - transform.position;
+                  angle =90f- Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
                 // Move the GameObject towards the target point
                 transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
@@ -63,5 +75,10 @@ public class Worker_Ant : LivingEntity
         //Death function 
         
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * _distanceReach);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _distanceReach);
+    }
 }
