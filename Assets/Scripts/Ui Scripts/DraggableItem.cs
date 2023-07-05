@@ -1,4 +1,5 @@
-    
+
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEditor.PlayerSettings;
@@ -56,7 +57,9 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
 
     }
-
+    GameObject _currentBlock=null;
+    [Range(0,1)] public float _targetedAlpha = .01f;
+    [Range(0, 1)] public float _originalAlpha = 0f;
     public void OnDrag(PointerEventData eventData)
     {
         if (_isDragged)
@@ -64,11 +67,33 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, targetLayer);
-
             if (hit.collider != null)
             {
+
                 Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                draggedObject.transform.position = hit.collider.transform.position;
+                draggedObject.transform.position = hit.transform.transform.position;
+                if(_currentBlock!=hit.transform.gameObject)
+                {
+                    if(_currentBlock == null)
+                    {
+                        _currentBlock = hit.transform.gameObject;
+                    Color c = _currentBlock.GetComponent<SpriteRenderer>().color;
+                    c.a = _targetedAlpha;
+                    _currentBlock.GetComponent<SpriteRenderer>().color = c;
+                    }
+                    else
+                    {
+                        Color o = _currentBlock.GetComponent<SpriteRenderer>().color;
+                        o.a = _originalAlpha;
+                        _currentBlock.GetComponent<SpriteRenderer>().color = o;
+
+                        _currentBlock = hit.transform.gameObject;
+                        Color c = _currentBlock.GetComponent<SpriteRenderer>().color;
+                        c.a = _targetedAlpha;
+                        _currentBlock.GetComponent<SpriteRenderer>().color = c;
+                    }
+                }
+               
             }
         }
     }
@@ -88,7 +113,16 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             if (EconomySystem.Instance.buy(Price))
                 Instantiate(prefabToInstantiate, draggedObject.transform.position, Quaternion.identity);
             else Debug.Log("not planted well");
-        }
+
+
+            Color c = _currentBlock.GetComponent<SpriteRenderer>().color;
+            c.a = _originalAlpha;
+            _currentBlock.GetComponent<SpriteRenderer>().color = c;
+         }
+        Color o = _currentBlock.GetComponent<SpriteRenderer>().color;
+        o.a = _originalAlpha;
+        _currentBlock.GetComponent<SpriteRenderer>().color = o;
+
 
         // Destroy the dragged object
         Destroy(draggedObject);

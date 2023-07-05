@@ -48,9 +48,10 @@ public class Worker_Ant : LivingEntity
             while (Vector2.Distance(target.position,transform.position)>_distanceReach && target!=null)
             {
                 // Make the GameObject face the target point
-                  direction = target.position - transform.position;
+                  direction = (target.position - transform.position).normalized;
                   angle =90f- Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.up = direction;
 
                 // Move the GameObject towards the target point
                 transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
