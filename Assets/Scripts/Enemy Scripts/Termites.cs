@@ -19,7 +19,7 @@ public class Termites : LivingEntity
         DiedEvent += Death;
         DamageEvent += DamageEffect;
         State = EnemyState.moving;
-
+        uiScript=GameObject.FindObjectOfType<GameplayUiScript>();
         _animator=GetComponentInChildren<Animator>();
         StartCoroutine(Behaviour());
     }
@@ -52,7 +52,8 @@ public class Termites : LivingEntity
             if (hit.collider != null && hit.collider.TryGetComponent(out LivingEntity _ant))
             {
                 State = EnemyState.Attacking;
-                _animator.SetTrigger("attack");
+                if(_animator!=null) _animator.SetTrigger("attack");
+
                 _ant.takeDamage(_damageAmount);
             }
             yield return new WaitForSeconds(_CheckTime);        //wait for the attack animation time later.
@@ -61,24 +62,36 @@ public class Termites : LivingEntity
     }
     [Header("audios")]
     public AudioClip _damageSound;
+    GameplayUiScript uiScript;
     void DamageEffect()
     {
+        uiScript.EnemiesDamageIndication(transform.position,-10);
         PlaySoundEffect(_damageSound);
+        if(_damageParticleSystem!=null)
         _damageParticleSystem.Play();
     }
     [Header("Effects")]
     public GameObject _dieEffect;
+    public AudioClip _dieSound;
     void Death()
     {
+        SoundManager.Instance.PlaySoundEffect(_dieSound, true);
+        LevelManager.Instance.EnemyKilled();
         //Get destroyed
        Instantiate(_dieEffect, transform.position, Quaternion.identity);
     }
+
+    public AudioSource _enemyLoopSound;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.CompareTag("AntHouse"))
         {
             //Game over 
-            Debug.Log("Gameover");
+            LevelManager.Instance.LevelFailed();
+        }
+        if(collision.collider.CompareTag("Trigger"))
+        {
+            if (_enemyLoopSound != null) _enemyLoopSound.enabled = true;
         }
     }
     private void OnDrawGizmos()

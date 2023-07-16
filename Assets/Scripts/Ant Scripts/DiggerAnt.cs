@@ -23,7 +23,7 @@ public class DiggerAnt : LivingEntity
         yield return new WaitForSeconds(_timeToMine - 1f);
         transform.DOScale(Vector2.zero, .6f).OnComplete(() =>
         {
-            transform.DOScale(Vector2.one * .5f, .4f);
+            transform.DOScale(Vector2.one * .2f, .2f);
         }
         );
         _isMined = true;

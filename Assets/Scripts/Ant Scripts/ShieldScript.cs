@@ -11,10 +11,11 @@ public class ShieldScript : LivingEntity
         DiedEvent += Death;
         DamageEvent += DamageEffect;
     }
-
+    public AudioClip _dieclip;
     void Death()
     {
         //die effect
+        SoundManager.Instance.PlaySoundEffect(_dieclip);
     }
     [Header("Damage effects")]
     public ParticleSystem _damageParticleSystem;

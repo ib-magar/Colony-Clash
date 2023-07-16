@@ -1,9 +1,6 @@
 
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
-
 public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("Price")]
@@ -40,8 +37,10 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
 
             draggedObject = Instantiate(prefabToInstantiate, transform.position, Quaternion.identity);
+            if(draggedObject.TryGetComponent<PolygonCollider2D>(out PolygonCollider2D c)) { c.enabled = false; }
             _isDragged = true;
-            draggedObject.GetComponent<LivingEntity>().enabled = false;
+            //draggedObject.GetComponent<LivingEntity>().enabled = false;
+            if (draggedObject.TryGetComponent<LivingEntity>(out LivingEntity l)) l.enabled = false;
             canvasGroup.alpha = 0.6f;
             canvasGroup.blocksRaycasts = false;
 
@@ -97,7 +96,11 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             }
         }
     }
+    [Header("Is not crafts")]
+    public bool _isNotCraft=true;
 
+    [Header("sounds")]
+    public AudioClip _dropClip;
     public void OnEndDrag(PointerEventData eventData)
     {
         _isDragged = false;
@@ -111,7 +114,16 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             //Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //draggedObject.transform.position = hit.collider.transform.position;
             if (EconomySystem.Instance.buy(Price))
-                Instantiate(prefabToInstantiate, draggedObject.transform.position, Quaternion.identity);
+            {
+                SoundManager.Instance.PlaySoundEffect(_dropClip, true, .4f);
+               GameObject g = Instantiate(prefabToInstantiate, draggedObject.transform.position, Quaternion.identity);
+                if (g.TryGetComponent<PolygonCollider2D>(out PolygonCollider2D a)) { a.enabled = true; }
+                if (_isNotCraft)
+                {
+                    hit.collider.gameObject.layer = default;
+                    g.transform.parent = hit.collider.transform;
+                }
+            }
             else Debug.Log("not planted well");
 
 
@@ -127,7 +139,6 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         // Destroy the dragged object
         Destroy(draggedObject);
         draggedObject = null;
-
         canvasGroup.blocksRaycasts = true;
     }
 }

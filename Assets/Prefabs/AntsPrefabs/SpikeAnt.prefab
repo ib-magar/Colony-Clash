@@ -284,10 +284,10 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5692206844304332802}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -309,13 +309,15 @@ MonoBehaviour:
   _startVolume: 0.5
   pitchRange: {x: 0.8, y: 1.2}
   _blastTime: 2
-  _targetScale: 2
+  _targetScale: 1.4
   _blastRange: 1.41
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  _damageAmount: 25
   _shakeTime: 0.1
   _strength: 0.1
   _vibrato: 1
   _randomness: 5
   _dieEffect: {fileID: 2473918497908342117, guid: 55ec87076ffde27409d987bd2ed68934, type: 3}
+  _BlastSound: {fileID: 0}

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Worker_Ant : LivingEntity
 {
+
+    GameplayUiScript uiScript;
     public override void Start()
     {
         base.Start();
@@ -13,7 +15,7 @@ public class Worker_Ant : LivingEntity
         DamageEvent += DamageEffect;
         _workPointHolder = GameObject.FindGameObjectWithTag("WorkPointHolder").transform;
         _generateCoin.AddListener( EconomySystem.Instance.AddCoins);
-        
+        uiScript = GameObject.FindObjectOfType<GameplayUiScript>();
         StartCoroutine(WorkerAntBehaviour());
     }
     [Header("Events")]
@@ -57,14 +59,15 @@ public class Worker_Ant : LivingEntity
                 transform.position = Vector2.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
                 yield return null;
             }
-            PlaySoundEffect(_coinCollectedSound);
+            PlaySoundEffect(_coinCollectedSound[Random.Range(0,_coinCollectedSound.Length)]);
             if (_generateCoin != null) _generateCoin.Invoke(_coinValue);
+            uiScript.CoinGenereated(transform.position);
             yield return new WaitForSeconds(_waitTime);
         }
     }
 
     [Header("Audio")]
-    public AudioClip _coinCollectedSound;
+    public AudioClip[] _coinCollectedSound;
 
     void DamageEffect()
     {

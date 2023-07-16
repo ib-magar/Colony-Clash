@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 10
-  _startVolume: 0.057
+  _startVolume: 0.1
   pitchRange: {x: 0.8, y: 1.2}
   _generateCoin:
     m_PersistentCalls:
@@ -384,4 +384,8 @@ MonoBehaviour:
   _distanceReach: 0.15
   _waitTime: 1
   _rotationSpeed: 0.5
-  _coinCollectedSound: {fileID: 8300000, guid: c6c361e2a2c71c142831f2b398b07569, type: 3}
+  _coinCollectedSound:
+  - {fileID: 8300000, guid: 61b5a4da9101d3246a5cd049837abe98, type: 3}
+  - {fileID: 8300000, guid: 22f36cc8ba9a1d0459ea268a50328501, type: 3}
+  - {fileID: 8300000, guid: c6c361e2a2c71c142831f2b398b07569, type: 3}
+  - {fileID: 8300000, guid: 327e136794772f849886e2688a4e7962, type: 3}

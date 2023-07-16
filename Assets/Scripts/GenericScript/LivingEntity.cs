@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //When inheriting from this script make sure to make start function override and subscribe to the dieEvent
@@ -39,13 +40,15 @@ public class LivingEntity : MonoBehaviour, IHealth, ISoundEffects
     {
         if (DiedEvent != null)
             DiedEvent();   // calling die event
+
+        if (transform.parent != null) transform.parent.gameObject.layer = 6; //block layer
         GameObject.Destroy(gameObject);
     }
-
     protected void Damage()
     {
         if (DamageEvent != null) DamageEvent();
     }
+    internal float ReturnHealth() { return health; }
 
     [Header("Audio")]
     protected AudioSource _fxsource;

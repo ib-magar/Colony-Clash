@@ -211,10 +211,10 @@ MonoBehaviour:
   _startVolume: 0.805
   pitchRange: {x: 0.8, y: 1.2}
   State: 0
-  _speed: 0.3
+  _speed: 0.1
   _damageAmount: 1
   _CheckTime: 1
-  _checkDistance: 0.9
+  _checkDistance: 1.08
   _AntLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -222,6 +222,8 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _damageSound: {fileID: 8300000, guid: a47cba9a9fb64654fae5156f565d6b72, type: 3}
   _dieEffect: {fileID: 2473918497908342117, guid: 64c1e31790d610b448e4c01dd1fbd5cb, type: 3}
+  _dieSound: {fileID: 8300000, guid: 5e9aa0e08db32dd40b46c4fd3596f40b, type: 3}
+  _enemyLoopSound: {fileID: 0}
 --- !u!50 &6996263963070539057
 Rigidbody2D:
   serializedVersion: 4

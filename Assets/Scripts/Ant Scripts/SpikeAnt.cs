@@ -22,6 +22,7 @@ public class SpikeAnt : LivingEntity
     public float _targetScale;
     public float _blastRange;
     public LayerMask _targetLayerMask;
+    public float _damageAmount;
     IEnumerator Behavior()
     {
         transform.DOScale(Vector3.one * _targetScale, _blastTime);
@@ -32,7 +33,7 @@ public class SpikeAnt : LivingEntity
         {
             if(collider.TryGetComponent(out LivingEntity enemy))
             {
-                enemy.takeDamage(100f);     //max damage
+                enemy.takeDamage(_damageAmount);     //max damage
             }
         }
         Die();
@@ -52,8 +53,10 @@ public class SpikeAnt : LivingEntity
     }
     [Header("Effects")]
     public GameObject _dieEffect;
+    public AudioClip _BlastSound;
     void Death()
     {
+       // SoundManager.Instance.PlaySoundEffect(_BlastSound, true);
         //Die 
         Instantiate(_dieEffect, transform.position, Quaternion.identity);
        

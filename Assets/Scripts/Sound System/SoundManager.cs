@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
+using DG.Tweening;
 
 public class SoundManager : MonoBehaviour
 {
@@ -44,11 +46,39 @@ public class SoundManager : MonoBehaviour
 
     [Header("Audio sources")]
     private AudioSource _FxSource;
-    
-    public void PlaySoundEffect(AudioClip clip)
+    private IEnumerator Start()
     {
+        _FxSource=gameObject.AddComponent<AudioSource>();
+        yield return new WaitForSeconds(3f);
+        StartBgm();
+    }
+    public void PlaySoundEffect(AudioClip clip,bool _pitchVariation=true,float volume=.5f)
+    {
+        if(_pitchVariation)
+        {
+            _FxSource.pitch = Random.Range(.8f, 1.2f);
+        }
+        else
+        {
+            _FxSource.pitch = 1;
+        }
+
         _FxSource.PlayOneShot(clip);
     }
 
+    [Header("Bgm")]
+    public AudioSource _bgmSource;
+    public float _bgmVolume;
+    public void StartBgm()
+    {
+        float _currentBgmVolume = _bgmSource.volume;
+        _bgmSource.DOFade(_bgmVolume, 7f).From(0f);
+    }
+    public AudioClip _buttonClickClip;
+    public void ButtonClick()
+    {
+        _FxSource.pitch = Random.Range(.8f, 1.2f);
+        _FxSource.PlayOneShot(_buttonClickClip);
+    }
 
 }
