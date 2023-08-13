@@ -17,10 +17,12 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
 
     private bool _isDragged = false;
+    private GameplayUiScript _uiScript;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        _uiScript=GameObject.FindObjectOfType<GameplayUiScript>();  
     }
   
 
@@ -98,9 +100,11 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     [Header("Is not crafts")]
     public bool _isNotCraft=true;
-
+    public bool isWorkerAnt = false;
     [Header("sounds")]
     public AudioClip _dropClip;
+    [Header("info")]
+    public InfoObject _outofCapacityPrefab;
     public void OnEndDrag(PointerEventData eventData)
     {
         _isDragged = false;
@@ -113,18 +117,23 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             //Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //draggedObject.transform.position = hit.collider.transform.position;
-            if (EconomySystem.Instance.buy(Price))
+            if(isWorkerAnt)
             {
-                SoundManager.Instance.PlaySoundEffect(_dropClip, true, .4f);
-               GameObject g = Instantiate(prefabToInstantiate, draggedObject.transform.position, Quaternion.identity);
-                if (g.TryGetComponent<PolygonCollider2D>(out PolygonCollider2D a)) { a.enabled = true; }
-                if (_isNotCraft)
+                if(!WorkPlaceCapacity.Instance.isCapacityFull())
                 {
-                    hit.collider.gameObject.layer = default;
-                    g.transform.parent = hit.collider.transform;
+                    checkAndGenerate();
                 }
+                else
+                {
+                    //generate capacity is full.
+                  _uiScript.OutOfCapacityInfo();
+                }
+
             }
-            else Debug.Log("not planted well");
+            else
+            {
+                checkAndGenerate();
+            }
 
 
             Color c = _currentBlock.GetComponent<SpriteRenderer>().color;
@@ -140,6 +149,26 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         Destroy(draggedObject);
         draggedObject = null;
         canvasGroup.blocksRaycasts = true;
+    }
+    void checkAndGenerate()
+    {
+        if (EconomySystem.Instance.buy(Price))
+        {
+            SoundManager.Instance.PlaySoundEffect(_dropClip, true, .4f);
+            GameObject g = Instantiate(prefabToInstantiate, draggedObject.transform.position, Quaternion.identity);
+            if (g.TryGetComponent<PolygonCollider2D>(out PolygonCollider2D a)) { a.enabled = true; }
+            if (_isNotCraft && !isWorkerAnt)
+            {
+                hit.collider.gameObject.layer = default;
+            }
+            if (_isNotCraft)
+                g.transform.parent = hit.collider.transform;
+
+
+            if (isWorkerAnt) WorkPlaceCapacity.Instance.UpdateWorkerAntCapacity();
+
+        }
+        else Debug.Log("not planted well");
     }
 }
 

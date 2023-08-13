@@ -14,22 +14,33 @@ public class MainMenuHandler : MonoBehaviour
     public float _menuSound;
 
     private void Awake()
-    {
+    { 
         if (Time.timeScale < 1) Time.timeScale = 1;
     }
-    private IEnumerator Start()
+    public float _introVolume = .2f;
+    public float _MenuButtonVolume = .4f;
+    private void Start()
     {
         _FxSource=gameObject.AddComponent<AudioSource>();
-        _FxSource.volume = _menuSound;
+        _FxSource.volume = _MenuButtonVolume;
         IntroObject.SetActive(true);
         MainMenuObject.SetActive(false);
         _loadingScreen.SetActive(false);
         // GetComponent<IntroHandler>()._IntroFinished += ClickToStart;
-        yield return new WaitForSeconds(4f);
-        _menubgm.DOFade(.8f, 4f).From(0f);
-        Debug.Log("start");
+        _menubgm.DOFade(_introVolume, 4f).From(0f);
 
-        
+        Debug.Log("start");   
+    }
+
+    public void FadeMenuMusic()
+    {
+        _menubgm.DOFade(_menuSound, 1f);
+        _menubgm.GetComponent<AudioLowPassFilter>().enabled = false;
+    }
+    public void FadeOutMusic()
+    {
+        _menubgm.DOFade(_introVolume, 1f);
+        _menubgm.GetComponent<AudioLowPassFilter>().enabled = true;
     }
     public void ClickToStart()
     {
@@ -70,5 +81,8 @@ public class MainMenuHandler : MonoBehaviour
         PlayerPrefs.SetInt("Level", 5);
         StartGame();
     }
-
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

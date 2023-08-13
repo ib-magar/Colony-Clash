@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using TMPro.Examples;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -63,20 +64,25 @@ public class GameplayUiScript : MonoBehaviour
     }
 
     [Header("coin generation indicator")]
-    public CoinCollectionGeneration _coinGeneratePrefab;
+    public InfoObject _coinGeneratePrefab;
     public void CoinGenereated(Vector3 Pos)
     {
-        CoinCollectionGeneration c = Instantiate(_coinGeneratePrefab,transform.position,Quaternion.identity);
+        InfoObject c = Instantiate(_coinGeneratePrefab,transform.position,Quaternion.identity);
         c.SetRectTransformPosition(Pos);
     }
 
     [Header("Enemies damage indicator")]
-    public CoinCollectionGeneration _indcator;
+    public InfoObject _indcator;
     public void EnemiesDamageIndication(Vector3 Pos,int damageValue)
     {
-        
-        CoinCollectionGeneration c = Instantiate(_indcator, transform.position, Quaternion.identity);
+
+        InfoObject c = Instantiate(_indcator, transform.position, Quaternion.identity);
         c.SetRectTransformPosition(Pos,damageValue.ToString());
     }
-    
+    [Header("Out of capacity information")]
+    public InfoObject _outOfCapacityPrefab;
+    public void OutOfCapacityInfo()
+    {
+        InfoObject outOfCapacityInfo = Instantiate(_outOfCapacityPrefab);
+    }
 }
