@@ -49,7 +49,7 @@ public class WorkPlaceCapacity : MonoBehaviour
 
     public int[] WorkerAntsCapacityArray;
     public int _currentworkerAntsCapacity;
-    public int _currentWorkerAntCount=0;
+    public int _currentWorkerAntCount=1;
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(.1f);

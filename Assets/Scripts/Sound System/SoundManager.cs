@@ -49,8 +49,11 @@ public class SoundManager : MonoBehaviour
     private IEnumerator Start()
     {
         _FxSource=gameObject.AddComponent<AudioSource>();
+        _FxSource.volume = otherSoundVolume;
         yield return new WaitForSeconds(3f);
         StartBgm();
+        _audiofilter=GetComponent<AudioLowPassFilter>();
+        dimSound(false);
     }
     public void PlaySoundEffect(AudioClip clip,bool _pitchVariation=true,float volume=.5f)
     {
@@ -69,6 +72,7 @@ public class SoundManager : MonoBehaviour
     [Header("Bgm")]
     public AudioSource _bgmSource;
     public float _bgmVolume;
+    public float otherSoundVolume;
     public void StartBgm()
     {
         float _currentBgmVolume = _bgmSource.volume;
@@ -80,5 +84,10 @@ public class SoundManager : MonoBehaviour
         _FxSource.pitch = Random.Range(.8f, 1.2f);
         _FxSource.PlayOneShot(_buttonClickClip);
     }
-
+    [Header("filter")]
+    public AudioLowPassFilter _audiofilter;
+    public void dimSound(bool _dim)
+    {
+        _audiofilter.enabled = _dim;
+    }
 }

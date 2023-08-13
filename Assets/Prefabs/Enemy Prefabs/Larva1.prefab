@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3082d7037e7d66849b0af10527ce7e02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 6506319347498113875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.18, y: 3.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.72428346, y: 0.72428346, z: 0.72428346}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8823356257632717757}
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6506319347498113875}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d382053c2031114584287b6f48045f9, type: 3}
   m_Name: 
@@ -211,7 +211,7 @@ MonoBehaviour:
   _startVolume: 0.805
   pitchRange: {x: 0.8, y: 1.2}
   State: 0
-  _speed: 0.1
+  _speed: 0.15
   _damageAmount: 1
   _CheckTime: 1
   _checkDistance: 1.08
@@ -274,15 +274,19 @@ PolygonCollider2D:
       - {x: -0.14206982, y: 0.23088598}
       - {x: -0.21187115, y: 0.26194453}
       - {x: -0.27128792, y: 0.3419721}
-      - {x: -0.26888466, y: 0.42439055}
-      - {x: -0.34334278, y: 0.49811983}
-      - {x: -0.40404224, y: 0.5187814}
-      - {x: -0.4382143, y: 0.4953859}
-      - {x: -0.55264044, y: 0.5675404}
-      - {x: -0.6809187, y: 0.599627}
-      - {x: -0.81277895, y: 0.56081796}
-      - {x: -0.86601543, y: 0.47576523}
-      - {x: -0.8220782, y: 0.319731}
+      - {x: -0.2897272, y: 0.36186242}
+      - {x: -0.31207848, y: 0.38348478}
+      - {x: -0.32555246, y: 0.39680183}
+      - {x: -0.3571458, y: 0.40935713}
+      - {x: -0.40173912, y: 0.44848973}
+      - {x: -0.51095486, y: 0.4789589}
+      - {x: -0.62360144, y: 0.47457075}
+      - {x: -0.70335436, y: 0.4409724}
+      - {x: -0.7740536, y: 0.37318116}
+      - {x: -0.7809744, y: 0.35587925}
+      - {x: -0.7820134, y: 0.34549814}
+      - {x: -0.78401375, y: 0.34395367}
+      - {x: -0.78613186, y: 0.25109416}
       - {x: -0.76645374, y: 0.1335411}
       - {x: -0.62762356, y: -0.15165544}
       - {x: -0.5099592, y: -0.31795883}
@@ -370,7 +374,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b1d6f397ccf74a744b7231a3ea42f703, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.6745098}
   m_FlipX: 0

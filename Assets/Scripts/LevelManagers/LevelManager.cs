@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour
         _BossEnemy.SetActive(false);
         _cameraMg = GameObject.FindObjectOfType<CameraBlend>();
         currentLevel = PlayerPrefs.GetInt("Level");
+        
         yield return new WaitForSeconds(_beginWaitTime);
         StartCoroutine(showLevelWarning());
     }

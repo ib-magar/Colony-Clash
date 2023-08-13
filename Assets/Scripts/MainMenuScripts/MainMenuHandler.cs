@@ -52,7 +52,7 @@ public class MainMenuHandler : MonoBehaviour
     {
         PlayerPrefs.SetInt("Level", 1);
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        StartGame();
+        //StartGame();
     }
 
     public GameObject _loadingScreen;
@@ -60,7 +60,7 @@ public class MainMenuHandler : MonoBehaviour
     public void StartGame()
     {
         _loadingScreen.SetActive(true);
-        StartCoroutine(GameStartCoroutine());
+        //StartCoroutine(GameStartCoroutine());
     }
     IEnumerator GameStartCoroutine()
     {

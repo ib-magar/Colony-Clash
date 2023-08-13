@@ -10,8 +10,11 @@ public class LevelData : MonoBehaviour
     private void Start()
     {
         _levelMg = GameObject.FindObjectOfType<LevelManager>();
-
-
+    }
+    public float speed=.2f;
+    private void FixedUpdate()
+    {
+        transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
 

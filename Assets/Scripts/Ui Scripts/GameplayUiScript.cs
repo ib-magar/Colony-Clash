@@ -4,6 +4,7 @@ using TMPro;
 using TMPro.Examples;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameplayUiScript : MonoBehaviour
@@ -58,9 +59,9 @@ public class GameplayUiScript : MonoBehaviour
         Time.timeScale = 1f;
         _pauseMenu.SetActive(false);
     }
-    public void Quit()
+    public void MainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main Menu"); 
     }
 
     [Header("coin generation indicator")]

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: ff9ad77a8515af14caa22122a5ef8759, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 2640528741535479395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.3363976, y: 3.1438024, z: 0.02422775}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.72428346, y: 0.72428346, z: 0.72428346}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2640528740493339788}
@@ -385,15 +385,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.24600458, y: 0.5286453}
-      - {x: -0.5425668, y: 0.4452715}
-      - {x: -0.67269564, y: 0.027194023}
-      - {x: -0.6480913, y: -0.50911903}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.6323943, y: -0.4464364}
-      - {x: 0.7268944, y: -0.058329105}
-      - {x: 0.6520238, y: 0.38446188}
+    - - {x: 0.10519314, y: 0.47743917}
+      - {x: -0.14313078, y: 0.5080706}
+      - {x: -0.3097191, y: 0.51820844}
+      - {x: -0.47261238, y: 0.4452715}
+      - {x: -0.58107996, y: 0.31074524}
+      - {x: -0.61920166, y: 0.027194023}
+      - {x: -0.5781379, y: -0.41858995}
+      - {x: -0.48354053, y: -0.5}
+      - {x: 0.4629655, y: -0.50411487}
+      - {x: 0.5295205, y: -0.45055127}
+      - {x: 0.5952158, y: -0.10770857}
+      - {x: 0.5623722, y: 0.12704575}
+      - {x: 0.553246, y: 0.26984715}
+      - {x: 0.3763218, y: 0.40503657}
 --- !u!1 &6298396745217107562
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +471,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b1d6f397ccf74a744b7231a3ea42f703, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.6862745}
   m_FlipX: 0
