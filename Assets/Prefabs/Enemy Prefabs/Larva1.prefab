@@ -214,7 +214,7 @@ MonoBehaviour:
   _speed: 0.15
   _damageAmount: 1
   _CheckTime: 1
-  _checkDistance: 1.08
+  _checkDistance: 0.69
   _AntLayerMask:
     serializedVersion: 2
     m_Bits: 1024

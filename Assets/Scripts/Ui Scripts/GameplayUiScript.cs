@@ -20,8 +20,20 @@ public class GameplayUiScript : MonoBehaviour
         EconomySystem.Instance._coinsUpdatedEvent.AddListener(UpdateCoins);
         _levelmg=GameObject.FindObjectOfType<LevelManager>();
         _levelmg.NewWaveEvent += UpdateWave;
-
+        _levelmg.NewWaveEvent += UnlockFunction;
         _waveProgressbar.value = 0;
+    }
+
+    [Header("Ants lock")]
+    public DraggableItem[] lockedAnts;
+    public int[] unlockStates;
+    public void UnlockFunction(int x)
+    {
+        for(int i=0;i<lockedAnts.Length;i++)
+        {
+            if (i < unlockStates[x-1]) lockedAnts[i].isLock(false);
+            else lockedAnts[i].isLock(true);
+        }
     }
 
     public void UpdateCoins(int amount)

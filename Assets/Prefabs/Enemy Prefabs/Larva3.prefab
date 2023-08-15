@@ -593,7 +593,7 @@ MonoBehaviour:
   _startVolume: 0.805
   pitchRange: {x: 0.8, y: 1.2}
   State: 0
-  _speed: 0.3
+  _speed: 0.25
   _damageAmount: 4
   _CheckTime: 1
   _checkDistance: 0.95

@@ -18,14 +18,35 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     private bool _isDragged = false;
     private GameplayUiScript _uiScript;
+    [Header("Non-draggable")]
+    public bool isLocked = true;
+    public GameObject locked_image;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        _uiScript=GameObject.FindObjectOfType<GameplayUiScript>();  
+        _uiScript=GameObject.FindObjectOfType<GameplayUiScript>();
+       
     }
-  
-
+   public void isLock(bool value)
+    {
+        if(locked_image!= null)
+        {
+            if (value)
+            {
+                locked_image.SetActive(true);
+            }
+            else
+            {
+                locked_image.SetActive(false);
+                isLocked = false;
+            }
+        }
+    }
+    private void Start()
+    {
+        
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         //originalPosition = Camera.main.ScreenToWorldPoint(rectTransform.position);
@@ -35,7 +56,7 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     private RaycastHit2D hit;
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (EconomySystem.Instance.checkPrice(Price))
+        if (EconomySystem.Instance.checkPrice(Price) && !isLocked)
         {
 
             draggedObject = Instantiate(prefabToInstantiate, transform.position, Quaternion.identity);
@@ -107,52 +128,56 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public InfoObject _outofCapacityPrefab;
     public void OnEndDrag(PointerEventData eventData)
     {
-        _isDragged = false;
-        canvasGroup.alpha = 1f;
-
-         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-         hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, targetLayer);
-
-        if (hit.collider != null)
+        if (!isLocked)
         {
-            //Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //draggedObject.transform.position = hit.collider.transform.position;
-            if(isWorkerAnt)
+
+            _isDragged = false;
+            canvasGroup.alpha = 1f;
+
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, targetLayer);
+
+            if (hit.collider != null)
             {
-                if(!WorkPlaceCapacity.Instance.isCapacityFull())
+                //Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //draggedObject.transform.position = hit.collider.transform.position;
+                if (isWorkerAnt)
                 {
-                    checkAndGenerate();
+                    if (!WorkPlaceCapacity.Instance.isCapacityFull())
+                    {
+                        checkAndGenerate();
+                    }
+                    else
+                    {
+                        //generate capacity is full.
+                        _uiScript.OutOfCapacityInfo();
+                    }
+
                 }
                 else
                 {
-                    //generate capacity is full.
-                  _uiScript.OutOfCapacityInfo();
+                    checkAndGenerate();
                 }
 
+
+                Color c = _currentBlock.GetComponent<SpriteRenderer>().color;
+                c.a = _originalAlpha;
+                _currentBlock.GetComponent<SpriteRenderer>().color = c;
             }
-            else
-            {
-                checkAndGenerate();
-            }
+            Color o = _currentBlock.GetComponent<SpriteRenderer>().color;
+            o.a = _originalAlpha;
+            _currentBlock.GetComponent<SpriteRenderer>().color = o;
 
 
-            Color c = _currentBlock.GetComponent<SpriteRenderer>().color;
-            c.a = _originalAlpha;
-            _currentBlock.GetComponent<SpriteRenderer>().color = c;
-         }
-        Color o = _currentBlock.GetComponent<SpriteRenderer>().color;
-        o.a = _originalAlpha;
-        _currentBlock.GetComponent<SpriteRenderer>().color = o;
-
-
-        // Destroy the dragged object
-        Destroy(draggedObject);
-        draggedObject = null;
-        canvasGroup.blocksRaycasts = true;
+            // Destroy the dragged object
+            Destroy(draggedObject);
+            draggedObject = null;
+            canvasGroup.blocksRaycasts = true;
+        }
     }
     void checkAndGenerate()
     {
-        if (EconomySystem.Instance.buy(Price))
+        if (EconomySystem.Instance.buy(Price) && !isLocked)
         {
             SoundManager.Instance.PlaySoundEffect(_dropClip, true, .4f);
             GameObject g = Instantiate(prefabToInstantiate, draggedObject.transform.position, Quaternion.identity);

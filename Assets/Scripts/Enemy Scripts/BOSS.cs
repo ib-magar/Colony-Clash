@@ -266,11 +266,11 @@ public class BOSS : LivingEntity
             }
             else if (difficultyValue > .4f && difficultyValue < .8f)
             {
-                targetEnemy = enemies[Random.Range(2, 4)];
+                targetEnemy = enemies[Random.Range(1, 3)];
             }
             else
             {
-                targetEnemy = enemies[4];
+                targetEnemy = enemies[0];
             }
 
             Instantiate(targetEnemy, pos, targetEnemy.transform.rotation);

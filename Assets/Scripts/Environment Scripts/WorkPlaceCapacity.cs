@@ -61,5 +61,5 @@ public class WorkPlaceCapacity : MonoBehaviour
         if (_currentWorkerAntCount >= _currentworkerAntsCapacity) return true;
         return false;
     }
-    public void UpdateWorkerAntCapacity()=> _currentWorkerAntCount++;
+    public void UpdateWorkerAntCapacity()=> ++_currentWorkerAntCount;
 }
