@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using TMPro.Examples;
+//using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
