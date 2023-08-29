@@ -15660,7 +15660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &729152828
 Transform:
   m_ObjectHideFlags: 0
@@ -18933,15 +18933,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.40899998
       objectReference: {fileID: 0}
     - target: {fileID: 5179694439324902465, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_RootOrder
@@ -27442,6 +27442,9 @@ MonoBehaviour:
   - {fileID: 2058498171}
   - {fileID: 453798641}
   - {fileID: 1813535698}
+  - {fileID: 1428877952}
+  - {fileID: 520655093}
+  - {fileID: 729152827}
   _levelWarningSign: {fileID: 329203688}
   _LevelLoadTime: 10
   _currentWaveEnemiesCount: 0
@@ -32836,15 +32839,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.40899998
       objectReference: {fileID: 0}
     - target: {fileID: 5179694439324902465, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_RootOrder
@@ -44674,15 +44677,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341739120, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.40899998
       objectReference: {fileID: 0}
     - target: {fileID: 5179694439324902465, guid: 83f0b7bc443130145aafc64f5e500723, type: 3}
       propertyPath: m_RootOrder
@@ -46876,7 +46879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2058498172
 Transform:
   m_ObjectHideFlags: 0
@@ -47923,15 +47926,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 846092567, guid: 4c0cb5f969496884fbc53fb9684df046, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 846092567, guid: 4c0cb5f969496884fbc53fb9684df046, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 846092567, guid: 4c0cb5f969496884fbc53fb9684df046, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.732
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6506319347498113872, guid: 4c0cb5f969496884fbc53fb9684df046, type: 3}
       propertyPath: m_RootOrder
